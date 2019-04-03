@@ -26,7 +26,17 @@
           </button>
         </div>
       </div>
-      <div class="container-fluid"></div>
+      <div class="col container-fluid">
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5 class="card-title">Official greeting when you don't know name of a receiver</h5>
+            <!-- <h6 class="card-subtitle mb-2">Official greeting when you don't know name of a receiver</h6> -->
+            <p class="card-text">Dear Sir/Madam,</p>
+            <a href="#" class="card-link">Edit</a>
+            <a href="#" class="card-link text-danger">Remove</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
