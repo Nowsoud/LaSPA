@@ -1,37 +1,31 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+      <!-- div with sidebar -->
       <div class="col-md-3">
         <div class="list-group mt-3">
           <button
             type="button"
-            class="list-group-item list-group-item-action active d-flex justify-content-between"
-          >
-            Greetings
-            <span class="badge badge-light badge-pill">14</span>
-          </button>
-          <button
-            type="button"
             class="list-group-item list-group-item-action d-flex justify-content-between"
+            :class="{active: index === indexOfSelectedTopic}"
+            v-for="(snippet, index) in snippets"
+            :key="index"
+            @click="indexOfSelectedTopic = index"
           >
-            Inquery
-            <span class="badge badge-primary badge-pill">2</span>
-          </button>
-          <button
-            type="button"
-            class="list-group-item list-group-item-action d-flex justify-content-between"
-          >
-            Ending
-            <span class="badge badge-primary badge-pill">1</span>
+            {{snippet.snippet_theme}}
+            <span
+              class="badge badge-pill"
+              :class="[index === indexOfSelectedTopic ? 'badge-light' : 'badge-primary']"
+            >{{snippet.snippets_count}}</span>
           </button>
         </div>
       </div>
       <div class="col container-fluid">
         <div class="card mt-3">
           <div class="card-body">
-            <h5 class="card-title">{{ snippet_info.snippet_description }}</h5>
+            <h5 class="card-title"></h5>
             <!-- <h6 class="card-subtitle mb-2">Official greeting when you don't know name of a receiver</h6> -->
-            <p class="card-text">{{ snippet_info.snippet_text }}</p>
+            <p class="card-text"></p>
             <a href="#" class="card-link">Edit</a>
             <a href="#" class="card-link text-danger">Remove</a>
           </div>
@@ -43,7 +37,12 @@
 <script>
 export default {
   props: {
-    snippet_info: Object
+    snippets: Array
+  },
+  data() {
+    return {
+      indexOfSelectedTopic: 0
+    };
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
-    <SnippetViewer :snippet_info="snippets[0]"/>
+    <SnippetViewer :snippets="snippets"/>
   </div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
       snippets: [
         {
           snippet_theme: "Saying No",
+          snippets_count: 3,
           snippets: [
             {
               snippet_description:
@@ -53,6 +54,7 @@ Much appreciated,`
         },
         {
           snippet_theme: "Greetings",
+          snippets_count: 3,
           snippets: [
             {
               snippet_description:
