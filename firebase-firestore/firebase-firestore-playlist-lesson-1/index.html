@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>Cloud Cafe</h1>
+
+    <div class="content">
+
+        <form id="add-cafe-form"></form>
+
+        <ul id="cafe-list"></ul>
+
+    </div>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCFOIyToC5JqY7iFIu-bSI8Z4PmmsS79jo",
+            authDomain: "laspa-e5e1c.firebaseapp.com",
+            databaseURL: "https://laspa-e5e1c.firebaseio.com",
+            projectId: "laspa-e5e1c",
+            storageBucket: "laspa-e5e1c.appspot.com",
+            messagingSenderId: "960047733307"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
