@@ -29,9 +29,9 @@
       <div class="col container-fluid">
         <div class="card mt-3">
           <div class="card-body">
-            <h5 class="card-title">Official greeting when you don't know name of a receiver</h5>
+            <h5 class="card-title">{{ snippet_info.snippet_description }}</h5>
             <!-- <h6 class="card-subtitle mb-2">Official greeting when you don't know name of a receiver</h6> -->
-            <p class="card-text">Dear Sir/Madam,</p>
+            <p class="card-text">{{ snippet_info.snippet_text }}</p>
             <a href="#" class="card-link">Edit</a>
             <a href="#" class="card-link text-danger">Remove</a>
           </div>
@@ -40,3 +40,10 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    snippet_info: Object
+  }
+};
+</script>
