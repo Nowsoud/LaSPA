@@ -21,21 +21,17 @@
         </div>
       </div>
       <div class="col container-fluid">
-        <div class="card mt-3">
-          <div class="card-body">
-            <h5 class="card-title"></h5>
-            <!-- <h6 class="card-subtitle mb-2">Official greeting when you don't know name of a receiver</h6> -->
-            <p class="card-text"></p>
-            <a href="#" class="card-link">Edit</a>
-            <a href="#" class="card-link text-danger">Remove</a>
-          </div>
-        </div>
+        <SnippetList :snippets="snippets[indexOfSelectedTopic].snippets"/>
       </div>
     </div>
   </div>
 </template>
 <script>
+import SnippetList from "./SnippetList.vue";
 export default {
+  components: {
+    SnippetList
+  },
   props: {
     snippets: Array
   },

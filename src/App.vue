@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <NavBar/>
-    <SnippetViewer :snippets="snippets"/>
+    <SnippetNav :snippets="snippets"/>
   </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import SnippetViewer from "./components/SnippetViewer.vue";
+import SnippetNav from "./components/SnippetNav.vue";
 
 export default {
   name: "app",
   components: {
     NavBar,
-    SnippetViewer
+    SnippetNav
   },
   data() {
     return {
