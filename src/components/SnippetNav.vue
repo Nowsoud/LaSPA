@@ -3,11 +3,12 @@
     <div class="row">
       <!-- div with sidebar -->
       <div class="col-md-3">
-        <div class="list-group mt-3">
+        <div class="list-group mt-3" @mouseleave="hoveredIndex = null">
           <button
             type="button"
+            @mouseover="hoveredIndex = index"
             class="list-group-item list-group-item-action d-flex justify-content-between"
-            :class="{active: index === indexOfSelectedTopic}"
+            :class="{active: index === indexOfSelectedTopic, 'list-group-item-primary': index === hoveredIndex && index !== indexOfSelectedTopic}"
             v-for="(snippet, index) in snippets"
             :key="index"
             @click="indexOfSelectedTopic = index"
@@ -37,8 +38,14 @@ export default {
   },
   data() {
     return {
-      indexOfSelectedTopic: 0
+      indexOfSelectedTopic: 0,
+      hoveredIndex: null
     };
   }
 };
 </script>
+<style scoped>
+.list-group-item:hover {
+  cursor: pointer;
+}
+</style>

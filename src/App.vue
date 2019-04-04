@@ -25,7 +25,7 @@ export default {
             {
               snippet_description:
                 "Turning Down a Meeting While Asking to Reschedule",
-              snippet_text: `Hi [Name],
+              snippet_text: `Hi [Name],\n
 
 Thanks for sending the meeting invite over. Based on my current schedule, I won’t be available on [insert date here] at the time you’ve carved out, but I am free on any of the dates/times below if one of these works on your end.
 
