@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid scrollable">
     <div class="card my-3" v-for="(snippet, index) in snippets" :key="index">
       <div class="card-body">
         <h5 class="card-title multiline-text">{{snippet.snippet_description}}</h5>
@@ -22,6 +22,11 @@ export default {
 };
 </script>
 <style scoped>
+.scrollable {
+  position: absolute;
+  height: 100%;
+  overflow-y: scroll;
+}
 .multiline-text {
   white-space: pre-wrap;
   word-wrap: break-word;
