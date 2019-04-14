@@ -17,12 +17,12 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">My Snippets</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
+          <router-link class="nav-item" to="/snippets" tag="li">
+            <a>Snippets</a>
+          </router-link>
+          <router-link class="nav-item" to="/about" tag="li">
+            <a>About</a>
+          </router-link>
           <li class="nav-item">
             <a class="nav-link" href="#">Login</a>
           </li>
