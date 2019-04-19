@@ -20,23 +20,19 @@
       SnippetItem
     },
 
-    created() {
-      var group = this.$route.params.group
-      db.collection(group).get().then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          this.snippets.push({
-            topic: doc.get("topic"),
-            body: doc.get("body").split("\\n").join("\n"),
-            id: doc.id
-          })
-        })
-      })
-    },
-
     watch: {
-      '$route.params.group': function(group) {
+      '$route.params.group': {
+        immediate: true,
+        handler: function(group) {
+          this.fetchSnippetsFromCollection(group);
+        }
+      }
+    },
+    
+    methods: {
+      fetchSnippetsFromCollection(collectionName) {
         this.snippets = []
-        db.collection(group).get().then(querySnapshot => {
+        db.collection(collectionName).get().then(querySnapshot => {
           querySnapshot.forEach(doc => {
             this.snippets.push({
               topic: doc.get("topic"),
