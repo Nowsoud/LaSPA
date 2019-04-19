@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom">
+    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom py-0">
       <!-- <h3 class="navbar-brand">Snippets</h3> -->
 
       <img src="../assets/logo.png" alt="logo" class="logopicture">
@@ -27,6 +27,27 @@
           <li class="nav-item">
             <a href="#">Login</a>
           </li>
+
+          <div class="dropdown">
+            <a class="dropdown-toggle"
+            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+              Log in via
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <ul class="nav nav-fill">
+                <li class="nav-item">
+                  <i class='fab fa-facebook' style='font-size:36px; color: blue;'></i>
+                </li>
+                <li class="nav-item">
+                  <i class='fab fa-google' style='font-size:36px;color:red'></i>
+                </li>
+                <li class="nav-item">
+                  <i class='fab fa-github' style='font-size:36px'></i>
+                </li>
+              </ul>
+            </div>
+          </div>
         </ul>
       </div>
     </nav>
