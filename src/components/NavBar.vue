@@ -1,8 +1,9 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom">
-      <h3 class="navbar-brand">Snippets</h3>
+      <!-- <h3 class="navbar-brand">Snippets</h3> -->
 
+      <img src="../assets/logo.png" alt="logo" class="logopicture">
       <button
         class="navbar-toggler"
         type="button"
@@ -24,10 +25,16 @@
             <a>About</a>
           </router-link>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a href="#">Login</a>
           </li>
         </ul>
       </div>
     </nav>
   </div>
 </template>
+<style>
+.logopicture {
+  height: 65px;
+  width: auto;
+}
+</style>
