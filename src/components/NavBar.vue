@@ -25,14 +25,14 @@
             <a>About</a>
           </router-link>
           <li class="nav-item">
-            <a href="#">Login</a>
+            <a href="#" @click="signOut" v-if="isUserSignedIn">Sign out</a>
           </li>
 
-          <div class="dropdown">
+          <div class="dropdown" v-if="!isUserSignedIn">
             <a class="dropdown-toggle"
             type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-              Log in via
+              Sign in via
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <ul class="nav nav-fill">
@@ -40,7 +40,7 @@
                   <i class='fab fa-facebook' style='font-size:36px; color: blue;'></i>
                 </li>
                 <li class="nav-item">
-                  <i class='fab fa-google' style='font-size:36px;color:red'></i>
+                  <i class='fab fa-google' v-on:click="signInViaGoogle" style='font-size:36px;color:red'></i>
                 </li>
                 <li class="nav-item">
                   <i class='fab fa-github' style='font-size:36px'></i>
@@ -53,6 +53,45 @@
     </nav>
   </div>
 </template>
+
+<script>
+  import firebase from 'firebase';
+  export default {
+    data() {
+      return {
+        currentUser: null,
+        isUserSignedIn: false
+      }
+    },
+
+    created() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.isUserSignedIn = true
+        } else {
+          this.isUserSignedIn = false
+        }
+      })
+    },
+
+    methods: {
+      signInViaGoogle: function () {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).catch((err) => {
+          alert(err.message)
+        });
+        this.currentUser = firebase.auth().currentUser
+      },
+
+      signOut: function() {
+        this.currentUser = null
+        firebase.auth().signOut()
+        alert('signed out')
+      }
+    }
+  }
+</script>
+
 <style>
 .logopicture {
   height: 65px;
