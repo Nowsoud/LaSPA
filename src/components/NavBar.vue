@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom">
+    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom py-0">
       <!-- <h3 class="navbar-brand">Snippets</h3> -->
 
       <img src="../assets/logo.png" alt="logo" class="logopicture">
@@ -25,13 +25,63 @@
             <a>About</a>
           </router-link>
           <li class="nav-item">
-            <a href="#">Login</a>
+            <a href="#" @click="signOut" v-if="isUserSignedIn">Sign out</a>
           </li>
+
+          <div class="dropdown" v-if="!isUserSignedIn">
+            <a class="dropdown-toggle"
+            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+              Sign in via
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <ul class="nav nav-fill">
+                <li class="nav-item">
+                  <i class='fab fa-facebook' style='font-size:24px; color: blue;'></i>
+                </li>
+                <li class="nav-item">
+                  <i class='fab fa-google' v-on:click="signInViaGoogle" style='font-size:24px;color:red'></i>
+                </li>
+                <li class="nav-item">
+                  <i class='fab fa-github' style='font-size:24px'></i>
+                </li>
+              </ul>
+            </div>
+          </div>
         </ul>
       </div>
     </nav>
   </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+      }
+    },
+
+    created() {
+    },
+
+    computed: {
+      isUserSignedIn() {
+        return !!this.$store.getters.getCurrentUser
+      }
+    },
+
+    methods: {
+      signInViaGoogle: function () {
+        this.$store.dispatch('signInViaGoogle')
+      },
+
+      signOut: function () {
+        this.$store.dispatch('signUserOut')
+      }
+    }
+  }
+</script>
+
 <style>
 .logopicture {
   height: 65px;
