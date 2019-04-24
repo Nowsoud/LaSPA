@@ -41,7 +41,7 @@
     data() {
       return {
         greetingsCount: 0,
-        sayingNoCount: 0,
+        sayingNoCount: 0
       }
     },
 
