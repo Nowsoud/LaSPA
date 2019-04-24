@@ -19,6 +19,14 @@
               Saying No<span class="badge badge-primary">{{ sayingNoCount }}</span>
             </router-link>
         </div>
+
+        <div class="list-group mt-5">
+          <h5>Custom snippets</h5>
+          <ul class="list-group">
+            <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">Sign in to customize own snippets</li>
+          </ul>
+        </div>
+
       </div>
       <div class="col container-fluid">
         <router-view></router-view>
@@ -33,7 +41,13 @@
     data() {
       return {
         greetingsCount: 0,
-        sayingNoCount: 0
+        sayingNoCount: 0,
+      }
+    },
+
+    computed: {
+      isUserSignedIn() {
+        return !!this.$store.getters.getCurrentUser
       }
     },
 

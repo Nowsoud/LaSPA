@@ -37,13 +37,13 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <ul class="nav nav-fill">
                 <li class="nav-item">
-                  <i class='fab fa-facebook' style='font-size:36px; color: blue;'></i>
+                  <i class='fab fa-facebook' style='font-size:24px; color: blue;'></i>
                 </li>
                 <li class="nav-item">
-                  <i class='fab fa-google' v-on:click="signInViaGoogle" style='font-size:36px;color:red'></i>
+                  <i class='fab fa-google' v-on:click="signInViaGoogle" style='font-size:24px;color:red'></i>
                 </li>
                 <li class="nav-item">
-                  <i class='fab fa-github' style='font-size:36px'></i>
+                  <i class='fab fa-github' style='font-size:24px'></i>
                 </li>
               </ul>
             </div>
@@ -55,38 +55,28 @@
 </template>
 
 <script>
-  import firebase from 'firebase';
   export default {
     data() {
       return {
-        currentUser: null,
-        isUserSignedIn: false
       }
     },
 
     created() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.isUserSignedIn = true
-        } else {
-          this.isUserSignedIn = false
-        }
-      })
+    },
+
+    computed: {
+      isUserSignedIn() {
+        return !!this.$store.getters.getCurrentUser
+      }
     },
 
     methods: {
       signInViaGoogle: function () {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).catch((err) => {
-          alert(err.message)
-        });
-        this.currentUser = firebase.auth().currentUser
+        this.$store.dispatch('signInViaGoogle')
       },
 
-      signOut: function() {
-        this.currentUser = null
-        firebase.auth().signOut()
-        alert('signed out')
+      signOut: function () {
+        this.$store.dispatch('signUserOut')
       }
     }
   }
