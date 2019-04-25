@@ -21,7 +21,7 @@
         </div>
 
         <div class="list-group mt-5">
-          <h5>Custom snippets</h5>
+          <h5>Custom snippets<i class='fas fa-plus' style='color: green' @click='addCustomCollection'></i></h5>
           <ul class="list-group">
             <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">Sign in to customize own snippets</li>
           </ul>
@@ -59,6 +59,12 @@
       firebase.firestore().collection("saying_no").get().then(querySnapshot => {
             this.sayingNoCount = querySnapshot.size
       })
+    },
+
+    methods: {
+      addCustomCollection() {
+        alert('aaa')
+      }
     }
   }
 </script>
