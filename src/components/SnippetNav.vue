@@ -35,11 +35,13 @@
 
           <ul class="list-group">
             <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">Sign in to customize own snippets</li>
-            <li class="list-group-item list-group-item-info py-0 pl-2" v-for="(collection, index) in customCollections" :key="index">
-              <div class="d-inline-block">{{collection.name}}</div>
+            <li class="list-group-item list-group-item-info p-0" v-for="(collection, index) in customCollections" :key="index">
+              <router-link tag="div" :to="{ path: '/snippets/customs', query: { collection: collection }}" class="float-left w-75">
+                {{collection.name}}
+              </router-link>
               
-              <div class="float-right">
-                <button class="btn btn-outline-danger" type="button" @click='removeCustomCollection(index)'>
+              <div class="float-right w-25">
+                <button class="btn btn-outline-danger py-0 w-100" type="button" @click='removeCustomCollection(index)'>
                   <i class='fas fa-minus' style='color: red; font-size: 10px'></i>
                 </button>
               </div>
@@ -66,8 +68,6 @@
         newCollectionName: "",
         greetingsCount: 0,
         sayingNoCount: 0,
-        newSnippetTopic: 'Topic',
-        newSnippetBody: 'Body'
       }
     },
 
@@ -92,7 +92,7 @@
 
     watch: {
       isUserSignedIn: function (value) {
-        alert('watcher triggered')
+        // alert('watcher triggered')
         if (value) {
           // console.log("aaa" + this.getRefToUserCustoms)
           this.getRefToUserCustoms.get().then((snapshot) => {
@@ -126,7 +126,9 @@
             this.sayingNoCount = querySnapshot.size
       })
 
-      this.fetchCustomCollections()
+      if (this.isUserSignedIn) {
+        this.fetchCustomCollections()
+      }
     },
 
     methods: {
