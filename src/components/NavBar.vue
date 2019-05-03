@@ -3,7 +3,9 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom py-0">
       <!-- <h3 class="navbar-brand">Snippets</h3> -->
 
-      <img src="../assets/logo.png" alt="logo" class="logopicture">
+      <router-link to="/">
+        <img src="../assets/logo.png" alt="logo" class="logopicture">
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"

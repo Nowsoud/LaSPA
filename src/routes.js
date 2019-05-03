@@ -20,6 +20,11 @@ let routes = [
   {
     path: '/about',
     component: require('./components/About').default
+  },
+
+  {
+    path: '/',
+    // component: require('./App').default
   }
 ]
 
