@@ -16,11 +16,11 @@
                             <div class="modal-body">
                                     <div class="form-group">
                                         <label for="topic" class="col-form-label">Topic:</label>
-                                        <input type="text" class="form-control" id="topic" v-model="newSnippetTopic">
+                                        <input type="text" class="form-control" id="topic" v-model="newSnippet.topic">
                                     </div>
                                     <div class="form-group">
                                         <label for="body" class="col-form-label">Body:</label>
-                                        <textarea class="form-control" id="body" rows="7" v-model="newSnippetBody"></textarea>
+                                        <textarea class="form-control" id="body" rows="7" v-model="newSnippet.body"></textarea>
                                     </div>
                             </div>
                             <div class="modal-footer">
@@ -46,8 +46,10 @@ export default {
     data() {
         return {
             collection: null,
-            newSnippetTopic: '',
-            newSnippetBody: '',
+            newSnippet: {
+                topic: '',
+                body: ''
+            },
             snippets: []
         }
     },
@@ -76,12 +78,14 @@ export default {
     methods: {
         addNewSnippet() {
             // console.log(this.getRefToUserCustoms)//.collection('this.collection.name'))
-            this.getRefToUserCustoms.collection(this.collection.name).doc().set({
-                topic: this.newSnippetTopic,
-                body: this.newSnippetBody
-            }).then(this.fetchSnippetsFromCollection()).catch((err) => {
+            this.getRefToUserCustoms.collection(this.collection.name).doc()
+            .set(this.newSnippet).then(this.fetchSnippetsFromCollection()).catch((err) => {
                 alert(err.message)
             })
+            this.newSnippet = {
+                topic: '',
+                body: ''
+            }
         },
 
         fetchSnippetsFromCollection() {
