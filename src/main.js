@@ -64,7 +64,8 @@ const store = new Vuex.Store({
             //и коллекции с его кастомными снипетами
             var newUserCustoms = {
               userEmail: user.user.email,
-              userID: user.user.uid
+              userID: user.user.uid,
+              collections: []
             }
             //заливаем данные пользователя в его пустой документ
             docSnapshot.ref.set(newUserCustoms).then(function () {

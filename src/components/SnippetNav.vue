@@ -80,40 +80,16 @@
       isUserSignedIn() {
         return !!this.getCurrentUser && !!this.getRefToUserCustoms
       }
-      // customCollections() {
-        // this.getReftoUserCustoms.get().then((snapshot) => {
-        //   return snapshot.get('collections')
-        // }).catch((err) => {
-        //   alert(err.message)
-        // })
-      //   return ['test1', 'test2']
-      // }
     },
 
     watch: {
       isUserSignedIn: function (value) {
         // alert('watcher triggered')
         if (value) {
-          // console.log("aaa" + this.getRefToUserCustoms)
-          this.getRefToUserCustoms.get().then((snapshot) => {
-            this.customCollections = snapshot.get('collections')
-            console.log(this.customCollections)
-          }).catch((err) => {
-            alert(err.message)
-          })
-          // this.fetchCustomCollections
-          // this.getRefToUserCustoms.onSnapshot(function (doc) {
-          //   console.log(doc.get('collections'))
-          //   this.customCollections = doc.get('collections')
-          //   console.log(this.customCollections)
-          // })
+          this.fetchCustomCollections()
         } else {
           this.customCollections = []
-          // unsubscribe()
         }
-        // console.log(this.getRefToUserCustoms)
-        // console.log(this.$store.state.refToUserCustoms)
-        // console.log(value)
       }
     },
 
@@ -163,6 +139,11 @@
       fetchCustomCollections: function () {
         this.getRefToUserCustoms.get().then((snapshot) => {
           this.customCollections = snapshot.get('collections')
+          this.customCollections.forEach(function(collection) {
+            collection.toString = function() {
+              return this.name
+            }
+          })
           // console.log(this.customCollections)
         }).catch((err) => {
           alert(err.message)
