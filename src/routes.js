@@ -7,6 +7,7 @@ let routes = [
     children: [
       {
         path: "customs",
+        props: true,
         component: require('./components/CustomSnippetList').default,
       },
 
