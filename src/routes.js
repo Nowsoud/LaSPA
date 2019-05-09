@@ -6,6 +6,11 @@ let routes = [
     component: require('./components/SnippetNav').default,
     children: [
       {
+        path: "customs",
+        component: require('./components/CustomSnippetList').default,
+      },
+
+      {
         path: ":group",
         component: require('./components/SnippetList').default
       }
@@ -15,6 +20,11 @@ let routes = [
   {
     path: '/about',
     component: require('./components/About').default
+  },
+
+  {
+    path: '/',
+    // component: require('./App').default
   }
 ]
 

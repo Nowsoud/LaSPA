@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid scrollable">
-    <div class="card my-3" v-for="snippet in snippets" :key="snippet.id">
+    <div class="card my-3" v-for="(snippet, index) in snippets" :key="index">
       <SnippetItem :currentSnippet="snippet"></SnippetItem>
     </div>
   </div>
@@ -33,13 +33,7 @@
       fetchSnippetsFromCollection(collectionName) {
         this.snippets = []
         db.collection(collectionName).get().then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            this.snippets.push({
-              topic: doc.get("topic"),
-              body: doc.get("body").split("\\n").join("\n"),
-              id: doc.id
-            })
-          })
+          this.snippets = querySnapshot.docs
         })
       }
     }
