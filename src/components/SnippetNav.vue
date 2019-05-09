@@ -105,7 +105,7 @@
       db.collection("saying_no").get().then(querySnapshot => {
             this.sayingNoCount = querySnapshot.size
       })
-
+      
       if (this.isUserSignedIn) {
         this.fetchCustomCollections()
       }
@@ -136,11 +136,8 @@
           // [object Object]. Первое решение какое пришло в голову
           // Имя каждой коллекции должно быть уникальным
           // для каждого пользователя, иначе можно присамонить сатану
-          this.customCollections.forEach(function(collection) {
-            collection.toString = function() {
-              return this.name
-            }
-          })
+          
+         
         }).catch((err) => {
           alert(err.message)
         })
