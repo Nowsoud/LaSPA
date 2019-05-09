@@ -2,8 +2,10 @@
   <div>
     <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom py-0">
       <!-- <h3 class="navbar-brand">Snippets</h3> -->
-
-      <img src="../assets/logo.png" alt="logo" class="logopicture">
+      <router-link class="nav-item" to="/snippets" tag="a">
+        <img src="../assets/logo.png" alt="logo" class="logopicture">
+      </router-link>
+      
       <button
         class="navbar-toggler"
         type="button"
@@ -17,23 +19,22 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <router-link class="nav-item" to="/snippets" tag="li">
-            <a>Snippets</a>
+        <ul class="navbar-nav nav nav-pills ml-auto mt-2 mt-lg-0">
+          
+          <router-link class="nav-item btn" to="/about" tag="li">
+            About
           </router-link>
-          <router-link class="nav-item" to="/about" tag="li">
-            <a>About</a>
-          </router-link>
-          <li class="nav-item">
-            <a href="#" @click="signOut" v-if="isUserSignedIn">Sign out</a>
+
+          <li class="nav-item btn" @click="signOut" v-if="isUserSignedIn">
+            Sign out
           </li>
 
           <div class="dropdown" v-if="!isUserSignedIn">
-            <a class="dropdown-toggle"
-            type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-              Sign in via
-            </a>
+            <button class="btn btn-primary dropdown-toggle"
+              type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+                Sign in via
+            </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <ul class="nav nav-fill">
                 <li class="nav-item">
