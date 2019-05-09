@@ -1,20 +1,24 @@
 <template>
-  <div class="container-fluid fixed-height-to-bottom">
+  <div class="container-fluid">
     <div class="row occupy-parent">
       <!-- div with sidebar -->
       <div class="col-md-3">
         <div class="list-group mt-3">
+          
             <router-link
-            tag="button"
-            to="/snippets/Greetings"
-            type="button"
-            class="list-group-item list-group-item-action d-flex justify-content-between">
-              Greetings<span class="badge badge-primary"> {{ greetingsCount }}</span>
+              tag="button" to="/snippets/Greetings" type="button"
+              class="list-group-item list-group-item-action d-flex justify-content-between">
+                Greetings
+              <span class="badge badge-primary"> {{ greetingsCount }} </span>
             </router-link>
-            <router-link tag="button" to="/snippets/saying_no" type="button"
-            class="list-group-item list-group-item-action d-flex justify-content-between">
-              Saying No<span class="badge badge-primary">{{ sayingNoCount }}</span>
+
+            <router-link
+              tag="button" to="/snippets/saying_no" type="button"
+              class="list-group-item list-group-item-action d-flex justify-content-between">
+                Saying No
+              <span class="badge badge-primary">{{ sayingNoCount }}</span>
             </router-link>
+
         </div>
 
         <div class="list-group mt-5">
@@ -51,7 +55,7 @@
 
       </div>
       <div class="col container-fluid">
-        <router-view></router-view>
+        <router-view style="height: 90vh;"/>
       </div>
     </div>
   </div>
@@ -110,68 +114,42 @@
     methods: {
 
       removeCustomCollection (index) {
-        // console.log(this.customCollections[index].name)
-        // var  = this.customCollections.filter(el => el!=this.customCollections[index])
         this.getRefToUserCustoms.update({
           collections: this.customCollections.filter(el => el!=this.customCollections[index])
         }).then(this.fetchCustomCollections())
       },
 
       addCustomCollection: function () {
-        var kostyl = this
         var obj = { name: this.newCollectionName, count: 0 }
         this.getRefToUserCustoms.update({
           collections: [...this.customCollections, obj]
-        }).then(function () {
-          kostyl.customCollections.push(obj)
-          // console.log(this)
-          // Я хз почему но в этом месте this становится undefined при том что
-          // я не использую arrow function. Пришлось на костылях
-          // kostyl.getRefToUserCustoms.get().then(function (snapshot) {
-          //   kostyl.customCollections = snapshot.get('collections')
-          //   console.log(kostyl.customCollections)
-          // }).catch((err) => {
-          //   alert(err.message)
-          // })
+        }).then(() => {
+          this.fetchCustomCollections()
         })
       },
 
       fetchCustomCollections: function () {
         this.getRefToUserCustoms.get().then((snapshot) => {
           this.customCollections = snapshot.get('collections')
+          //каждому объекту-коллекции добавляю метод toString()
+          //чтобы, в адресной строке писалось его имя, а не 
+          // [object Object]. Первое решение какое пришло в голову
+          // Имя каждой коллекции должно быть уникальным
+          // для каждого пользователя, иначе можно присамонить сатану
           this.customCollections.forEach(function(collection) {
             collection.toString = function() {
               return this.name
             }
           })
-          // console.log(this.customCollections)
         }).catch((err) => {
           alert(err.message)
         })
       }
     }
-
-    // watch: {
-    //   newCollectionName() {
-    //     console.log(this.newCollectionName)
-    //   }
-    // }
   }
 </script>
 
 <style scoped>
-  .fixed-height-to-bottom {
-    position: absolute;
-    top: 65px;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-  }
-  .occupy-parent {
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
   .list-group-item:hover {
     cursor: pointer;
   }

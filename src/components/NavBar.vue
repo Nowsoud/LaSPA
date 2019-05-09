@@ -1,11 +1,10 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom py-0">
-      <!-- <h3 class="navbar-brand">Snippets</h3> -->
-
-      <router-link to="/">
+      <router-link class="navbar-brand" to="/snippets" tag="a">
         <img src="../assets/logo.png" alt="logo" class="logopicture">
       </router-link>
+
       <button
         class="navbar-toggler"
         type="button"
@@ -15,41 +14,35 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"/>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <router-link class="nav-item" to="/snippets" tag="li">
-            <a>Snippets</a>
-          </router-link>
-          <router-link class="nav-item" to="/about" tag="li">
-            <a>About</a>
-          </router-link>
-          <li class="nav-item">
-            <a href="#" @click="signOut" v-if="isUserSignedIn">Sign out</a>
-          </li>
-
-          <div class="dropdown" v-if="!isUserSignedIn">
-            <a class="dropdown-toggle"
-            type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-              Sign in via
-            </a>
+        <ul class="navbar-nav nav nav-pills ml-auto mt-2 mt-lg-0">
+          <router-link class="nav-item btn" to="/about" tag="li">About</router-link>
+          <li class="nav-item btn" @click="signOut" v-if="isUserSignedIn">Sign out</li>
+          <li
+            class="nav-item btn"
+            v-if="!isUserSignedIn"
+            id="dropdownMenuButton"
+            data-toggle="dropdown">
+            <div>Sign in</div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <ul class="nav nav-fill">
                 <li class="nav-item">
-                  <i class='fab fa-facebook' style='font-size:24px; color: blue;'></i>
+                  <i class="fab fa-facebook" style="font-size:24px; color: blue;"/>
                 </li>
                 <li class="nav-item">
-                  <i class='fab fa-google' v-on:click="signInViaGoogle" style='font-size:24px;color:red'></i>
+                  <i class="fab fa-google"
+                     v-on:click="signInViaGoogle"
+                     style="font-size:24px;color:red"/>
                 </li>
                 <li class="nav-item">
-                  <i class='fab fa-github' style='font-size:24px'></i>
+                  <i class="fab fa-github" style="font-size:24px"/>
                 </li>
               </ul>
             </div>
-          </div>
+          </li>
         </ul>
       </div>
     </nav>
@@ -57,31 +50,29 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-      }
+export default {
+  data() {
+    return {};
+  },
+
+  created() {},
+
+  computed: {
+    isUserSignedIn() {
+      return !!this.$store.getters.getCurrentUser;
+    }
+  },
+
+  methods: {
+    signInViaGoogle: function() {
+      this.$store.dispatch("signInViaGoogle");
     },
 
-    created() {
-    },
-
-    computed: {
-      isUserSignedIn() {
-        return !!this.$store.getters.getCurrentUser
-      }
-    },
-
-    methods: {
-      signInViaGoogle: function () {
-        this.$store.dispatch('signInViaGoogle')
-      },
-
-      signOut: function () {
-        this.$store.dispatch('signUserOut')
-      }
+    signOut: function() {
+      this.$store.dispatch("signUserOut");
     }
   }
+};
 </script>
 
 <style>
