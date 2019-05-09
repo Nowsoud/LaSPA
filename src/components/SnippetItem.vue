@@ -2,15 +2,16 @@
   <div class="card-body">
     <h5 class="card-title multiline-text">{{ currentSnippet.get('topic') }}</h5>
     <p class="card-text multiline-text">{{ currentSnippet.get('body').split("\\n").join("\n") }}</p>
-    <a href="#" class="card-link">Edit</a>
-    <a href="#" class="card-link text-danger">Remove</a>
+    <a href="#" v-if="!isGeneral" class="card-link">Edit</a>
+    <a href="#" v-if="!isGeneral" class="card-link text-danger">Remove</a>
   </div>
 </template>
 
 <script>
   export default {
     props: {
-      currentSnippet: Object
+      currentSnippet: Object,
+      isGeneral: Boolean
     }
   }
 </script>

@@ -3,8 +3,8 @@
     <div class="row occupy-parent">
       <!-- div with sidebar -->
       <div class="col-md-3">
-        <div class="list-group mt-3">
-          
+        <div class="list-group mt-5">
+            <h5>General snippets</h5>
             <router-link
               tag="button" to="/snippets/Greetings" type="button"
               class="list-group-item list-group-item-action d-flex justify-content-between">
@@ -35,20 +35,18 @@
               </button>
             </div>
           </div>
-          <!-- <i class='fas fa-plus' style='color: green' @click='addCustomCollection'></i> -->
 
-          <ul class="list-group">
+          <ul class="list-group mt-3">
             <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">Sign in to customize own snippets</li>
-            <li class="list-group-item list-group-item-info p-0" v-for="(collection, index) in customCollections" :key="index">
+            <li class="list-group-item list-group-item-action" v-for="(collection, index) in customCollections" :key="index">
               <router-link tag="div" :to="{ path: '/snippets/customs', query: { collection: collection }}" class="float-left w-75">
                 {{collection.name}}
               </router-link>
+              <!-- I think we should add "remove collection" button to CustomSnippetList view -->
               
-              <div class="float-right w-25">
-                <button class="btn btn-outline-danger py-0 w-100" type="button" @click='removeCustomCollection(index)'>
-                  <i class='fas fa-minus' style='color: red; font-size: 10px'></i>
-                </button>
-              </div>
+              <!--button class="btn btn-outline-danger" type="button" @click='removeCustomCollection(index)'>
+                  <i class='fas fa-minus' style='color: red'></i>
+              </button-->
             </li>
           </ul>
         </div>
@@ -112,7 +110,11 @@
     },
 
     methods: {
-
+      removeCustomCollectionByName (name) {
+        this.getRefToUserCustoms.update({
+          collections: this.customCollections.filter(el => el.name!=name)
+        }).then(this.fetchCustomCollections())
+      },
       removeCustomCollection (index) {
         this.getRefToUserCustoms.update({
           collections: this.customCollections.filter(el => el!=this.customCollections[index])

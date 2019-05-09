@@ -1,8 +1,11 @@
 <template>
-    <div class="my-3 border border-dark">
-        <div class="mb-3" style="background-color: #c9c9c9">
-            <h3 class="d-inline m-0">{{collection.name}}</h3>
-            <button class="btn btn-success py-0" data-toggle="modal" data-target="#mod">New snippet</button>
+    <div class="container-fluid scrollable">
+        <div class="mb-3 p-3">
+            <h3 class="d-inline">{{collection.name}}</h3>
+            <button class="btn btn-success float-right ml-3" data-toggle="modal" data-target="#mod">New snippet</button>
+            <!-- I didn't figure out how to delete collection from here for now-->
+            <button class="btn btn-danger float-right">Remove Collection</button>
+            
             <div class="modal fade" id="mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
