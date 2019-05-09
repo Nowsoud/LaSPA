@@ -37,6 +37,8 @@ export default {
           .get()
           .then(function(docSnapshot) {
             store.commit("setRefToUserCustoms", docSnapshot.ref);
+            store.dispatch('updateUsersCustoms')
+            
             if (docSnapshot.exists) {
               console.log("doc exists, nothing to do");
             } else {

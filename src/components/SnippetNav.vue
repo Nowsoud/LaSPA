@@ -66,7 +66,6 @@
   export default {
     data() {
       return {
-        customCollections: [],
         newCollectionName: "",
         greetingsCount: 0,
         sayingNoCount: 0,
@@ -74,28 +73,19 @@
     },
 
     computed: {
-
+      customCollections() {
+        return this.$store.state.usersCustoms
+      },
       ...mapGetters([
         'getRefToUserCustoms', 'getCurrentUser'
       ]),
-
       isUserSignedIn() {
         return !!this.getCurrentUser && !!this.getRefToUserCustoms
       }
     },
 
-    watch: {
-      isUserSignedIn: function (value) {
-        // alert('watcher triggered')
-        if (value) {
-          this.fetchCustomCollections()
-        } else {
-          this.customCollections = []
-        }
-      }
-    },
-
     created() {
+      
       db.collection("Greetings").get().then(querySnapshot => {
             this.greetingsCount = querySnapshot.size
       })
@@ -104,45 +94,21 @@
             this.sayingNoCount = querySnapshot.size
       })
       
-      if (this.isUserSignedIn) {
-        this.fetchCustomCollections()
-      }
     },
 
     methods: {
       removeCustomCollectionByName (name) {
-        this.getRefToUserCustoms.update({
-          collections: this.customCollections.filter(el => el.name!=name)
-        }).then(this.fetchCustomCollections())
-      },
-      removeCustomCollection (index) {
-        this.getRefToUserCustoms.update({
-          collections: this.customCollections.filter(el => el!=this.customCollections[index])
-        }).then(this.fetchCustomCollections())
+        this.$store.commit('removeCustomCollectionByName', name) .then(this.fetchCustomCollections())
       },
 
       addCustomCollection: function () {
-        var obj = { name: this.newCollectionName, count: 0 }
-        this.getRefToUserCustoms.update({
-          collections: [...this.customCollections, obj]
-        }).then(() => {
+        this.$store.commit("addCustomCollection",this.newCollectionName).then(() => {
           this.fetchCustomCollections()
         })
       },
 
       fetchCustomCollections: function () {
-        this.getRefToUserCustoms.get().then((snapshot) => {
-          this.customCollections = snapshot.get('collections')
-          //каждому объекту-коллекции добавляю метод toString()
-          //чтобы, в адресной строке писалось его имя, а не 
-          // [object Object]. Первое решение какое пришло в голову
-          // Имя каждой коллекции должно быть уникальным
-          // для каждого пользователя, иначе можно присамонить сатану
-          
-         
-        }).catch((err) => {
-          alert(err.message)
-        })
+          this.customCollections = this.$store.state.usersCustoms
       }
     }
   }

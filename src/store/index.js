@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
     state: {
       currentUser: null,
       //ссылка на документ с данными пользователя и его кастомными коллекциями
-      refToUserCustoms: null
+      refToUserCustoms: null,
+      usersCustoms: null
     },
   
     getters: {
@@ -17,6 +18,9 @@ export const store = new Vuex.Store({
       },
       getRefToUserCustoms: state => {
         return state.refToUserCustoms
+      },
+      getUsersCustoms: state => {
+        return state.usersCustoms
       }
     },
   
@@ -27,11 +31,35 @@ export const store = new Vuex.Store({
 
       setRefToUserCustoms (state, reference) {
         state.refToUserCustoms = reference
+      },
+      setUsersCustoms(state, array){
+        state.usersCustoms = array
+      },
+      removeCustomCollectionByName(state,name){
+        return state.refToUserCustoms.update({
+          collections: state.getters.getUsersCustoms().filter(el => el.name!=name)
+        })
+      },
+      addCustomCollection: (state, newCollectionName)=>{
+        var obj = { name: newCollectionName, count: 0 }
+        return state.refToUserCustoms.update({
+          collections: [...state.getters.getUsersCustoms, obj]
+        })
       }
     },
   
     actions: {
-      signInViaGoogle: function ({getters, commit}) {
+
+      updateUsersCustoms: function ({state, commit}) {
+        state.refToUserCustoms.get()
+        .then((snapshot) => {
+          commit('setUsersCustoms', snapshot.get('collections'))
+        }).catch((err) => {
+          alert(err.message)
+        })
+      },
+
+      signInViaGoogle: function () {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>{
           return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         }).catch(()=>{});
@@ -40,6 +68,8 @@ export const store = new Vuex.Store({
       signUserOut: ({commit}) => {
         firebase.auth().signOut()
         commit('setCurrentUser', null)
+        commit('setRefToUserCustoms', null)
+        commit('setUsersCustoms', null)
       }
     }
   })
