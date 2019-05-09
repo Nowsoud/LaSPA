@@ -1,35 +1,41 @@
 <template>
-  <div class="container-fluid fixed-height-to-bottom">
+  <div class="container-fluid">
     <div class="row occupy-parent">
       <!-- div with sidebar -->
       <div class="col-md-3">
         <div class="list-group mt-3">
+          
             <router-link
-            tag="button"
-            to="/snippets/Greetings"
-            type="button"
-            class="list-group-item list-group-item-action d-flex justify-content-between">
-              Greetings<span class="badge badge-primary"> {{ greetingsCount }}</span>
+              tag="button" to="/snippets/Greetings" type="button"
+              class="list-group-item list-group-item-action d-flex justify-content-between">
+                Greetings
+              <span class="badge badge-primary"> {{ greetingsCount }} </span>
             </router-link>
+
             <router-link
-            tag="button"
-            to="/snippets/saying_no"
-            type="button"
-            class="list-group-item list-group-item-action d-flex justify-content-between">
-              Saying No<span class="badge badge-primary">{{ sayingNoCount }}</span>
+              tag="button" to="/snippets/saying_no" type="button"
+              class="list-group-item list-group-item-action d-flex justify-content-between">
+                Saying No
+              <span class="badge badge-primary">{{ sayingNoCount }}</span>
             </router-link>
+
         </div>
 
         <div class="list-group mt-5">
           <h5>Custom snippets</h5>
           <ul class="list-group">
-            <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">Sign in to customize own snippets</li>
+            <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">
+              Sign in to customize own snippets
+            </li>
+            <li v-if="isUserSignedIn" class="list-group-item">
+              You could be able to add a custom snippet soon...
+            </li>
           </ul>
         </div>
 
       </div>
       <div class="col container-fluid">
-        <router-view></router-view>
+        <router-view style="height: 90vh;"/>
       </div>
     </div>
   </div>
@@ -64,18 +70,6 @@
 </script>
 
 <style scoped>
-  .fixed-height-to-bottom {
-    position: absolute;
-    top: 65px;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-  }
-  .occupy-parent {
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
   .list-group-item:hover {
     cursor: pointer;
   }
