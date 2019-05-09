@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom py-0">
-      <router-link class="navbar-brand" to="/snippets" tag="a">
+      <router-link class="navbar-brand" to="/snippets/Greetings" tag="a">
         <img src="../assets/logo.png" alt="logo" class="logopicture">
       </router-link>
 
