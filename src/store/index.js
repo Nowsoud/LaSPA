@@ -34,16 +34,6 @@ export const store = new Vuex.Store({
       },
       setUsersCustoms(state, array){
         state.usersCustoms = array
-        // state.refToUserCustoms.get()
-        // .then((snapshot) => {
-        //   console.log(snapshot.get('collections'))
-        //   // state.usersCustoms = snapshot.get('collections')
-        //   state.usersCustoms = obj
-        //   console.log(state.usersCustoms)
-        // }).catch((err) => {
-        //   alert(err.message)
-        // })
-        // setTimeout(function() { alert('123');}, 3000)
       },
       removeCustomCollectionByName(state,name){
         return state.refToUserCustoms.update({
@@ -56,7 +46,6 @@ export const store = new Vuex.Store({
           collections: [...state.getters.getUsersCustoms, obj]
         })
       }
-
     },
   
     actions: {
@@ -65,10 +54,6 @@ export const store = new Vuex.Store({
         state.refToUserCustoms.get()
         .then((snapshot) => {
           commit('setUsersCustoms', snapshot.get('collections'))
-          // console.log(snapshot.get('collections'))
-          // state.usersCustoms = snapshot.get('collections')
-          // state.usersCustoms = obj
-          // console.log(state.usersCustoms)
         }).catch((err) => {
           alert(err.message)
         })

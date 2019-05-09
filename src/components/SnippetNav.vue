@@ -66,7 +66,6 @@
   export default {
     data() {
       return {
-        // customCollections: [],
         newCollectionName: "",
         greetingsCount: 0,
         sayingNoCount: 0,
@@ -85,18 +84,6 @@
       }
     },
 
-    watch: {
-      isUserSignedIn: function (value) {
-        alert('watcher triggered' + value)
-        // console.log(this.$store.state.usersCustoms)
-        // if (value) {
-        //   this.fetchCustomCollections()
-        //   alert('true')
-        // } else {
-        //   this.customCollections = []
-        // }
-      }
-    },
     created() {
       
       db.collection("Greetings").get().then(querySnapshot => {
@@ -107,9 +94,6 @@
             this.sayingNoCount = querySnapshot.size
       })
       
-      // if (this.isUserSignedIn) {
-      //   this.fetchCustomCollections()
-      // }
     },
 
     methods: {
