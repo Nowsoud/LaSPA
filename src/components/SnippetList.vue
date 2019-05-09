@@ -39,11 +39,3 @@
     }
   };
 </script>
-
-<style scoped>
-  .scrollable {
-    position: absolute;
-    height: 100%;
-    overflow-y: scroll;
-  }
-</style>

@@ -53,7 +53,7 @@
 
       </div>
       <div class="col container-fluid">
-        <router-view style="height: 90vh;"/>
+        <router-view style="height: 100%"/>
       </div>
     </div>
   </div>
