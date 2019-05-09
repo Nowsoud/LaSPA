@@ -66,7 +66,7 @@
   export default {
     data() {
       return {
-        customCollections: [],
+        // customCollections: [],
         newCollectionName: "",
         greetingsCount: 0,
         sayingNoCount: 0,
@@ -74,7 +74,9 @@
     },
 
     computed: {
-
+      customCollections() {
+        return this.$store.state.usersCustoms
+      },
       ...mapGetters([
         'getRefToUserCustoms', 'getCurrentUser'
       ]),
@@ -85,12 +87,14 @@
 
     watch: {
       isUserSignedIn: function (value) {
-        // alert('watcher triggered')
-        if (value) {
-          this.fetchCustomCollections()
-        } else {
-          this.customCollections = []
-        }
+        alert('watcher triggered' + value)
+        // console.log(this.$store.state.usersCustoms)
+        // if (value) {
+        //   this.fetchCustomCollections()
+        //   alert('true')
+        // } else {
+        //   this.customCollections = []
+        // }
       }
     },
     created() {
@@ -103,14 +107,14 @@
             this.sayingNoCount = querySnapshot.size
       })
       
-      if (this.isUserSignedIn) {
-        this.fetchCustomCollections()
-      }
+      // if (this.isUserSignedIn) {
+      //   this.fetchCustomCollections()
+      // }
     },
 
     methods: {
       removeCustomCollectionByName (name) {
-        this.$store.commit(removeCustomCollectionByName, name) .then(this.fetchCustomCollections())
+        this.$store.commit('removeCustomCollectionByName', name) .then(this.fetchCustomCollections())
       },
 
       addCustomCollection: function () {

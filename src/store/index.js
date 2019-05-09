@@ -9,7 +9,7 @@ export const store = new Vuex.Store({
       currentUser: null,
       //ссылка на документ с данными пользователя и его кастомными коллекциями
       refToUserCustoms: null,
-      usersCustoms:null
+      usersCustoms: null
     },
   
     getters: {
@@ -32,13 +32,18 @@ export const store = new Vuex.Store({
       setRefToUserCustoms (state, reference) {
         state.refToUserCustoms = reference
       },
-      updateUsersCustoms(state){
-        state.refToUserCustoms.get()
-        .then((snapshot) => {
-          state.usersCustoms = snapshot.get('collections')  
-        }).catch((err) => {
-          alert(err.message)
-        })
+      setUsersCustoms(state, array){
+        state.usersCustoms = array
+        // state.refToUserCustoms.get()
+        // .then((snapshot) => {
+        //   console.log(snapshot.get('collections'))
+        //   // state.usersCustoms = snapshot.get('collections')
+        //   state.usersCustoms = obj
+        //   console.log(state.usersCustoms)
+        // }).catch((err) => {
+        //   alert(err.message)
+        // })
+        // setTimeout(function() { alert('123');}, 3000)
       },
       removeCustomCollectionByName(state,name){
         return state.refToUserCustoms.update({
@@ -55,7 +60,21 @@ export const store = new Vuex.Store({
     },
   
     actions: {
-      signInViaGoogle: function ({getters, commit}) {
+
+      updateUsersCustoms: function ({state, commit}) {
+        state.refToUserCustoms.get()
+        .then((snapshot) => {
+          commit('setUsersCustoms', snapshot.get('collections'))
+          // console.log(snapshot.get('collections'))
+          // state.usersCustoms = snapshot.get('collections')
+          // state.usersCustoms = obj
+          // console.log(state.usersCustoms)
+        }).catch((err) => {
+          alert(err.message)
+        })
+      },
+
+      signInViaGoogle: function () {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>{
           return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         }).catch(()=>{});
@@ -64,6 +83,8 @@ export const store = new Vuex.Store({
       signUserOut: ({commit}) => {
         firebase.auth().signOut()
         commit('setCurrentUser', null)
+        commit('setRefToUserCustoms', null)
+        commit('setUsersCustoms', null)
       }
     }
   })
