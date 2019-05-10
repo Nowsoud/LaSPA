@@ -7,7 +7,6 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
       currentUser: null,
-      //ссылка на документ с данными пользователя и его кастомными коллекциями
       refToUserCustoms: null,
       usersCustoms: null
     },
@@ -28,7 +27,6 @@ export const store = new Vuex.Store({
       setCurrentUser: (state, user) => {
         state.currentUser = user
       },
-
       setRefToUserCustoms (state, reference) {
         state.refToUserCustoms = reference
       },
@@ -49,7 +47,6 @@ export const store = new Vuex.Store({
     },
   
     actions: {
-
       updateUsersCustoms: function ({state, commit}) {
         state.refToUserCustoms.get()
         .then((snapshot) => {
