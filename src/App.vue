@@ -22,42 +22,31 @@ export default {
     NavBar
   },
   data() {
-    return {};
+    return {}
   },
   beforeCreate() {
     firebase.auth().onAuthStateChanged(user => {
       var store = this.$store;
       if (user) {
-        store.commit("setCurrentUser", user);
+        store.commit("setCurrentUser", user)
 
         firebase
           .firestore()
           .collection("customCollections")
           .doc(user.uid)
           .get()
-          .then(function(docSnapshot) {
-            store.commit("setRefToUserCustoms", docSnapshot.ref);
+          .then((docSnapshot) => {
+            store.commit("setRefToUserCustoms", docSnapshot.ref)
             store.dispatch('updateUsersCustoms')
-            
-            if (docSnapshot.exists) {
-              console.log("doc exists, nothing to do");
-            } else {
-              console.log("doc doesnt exist");
-
-              var newUserCustoms = {
-                userEmail: user.email,
-                userID: user.uid,
-                collections: []
-              };
-              docSnapshot.ref.set(newUserCustoms).then(function() {
-                console.log("data successfuly written");
-              });
+            if (!docSnapshot.exists) {
+              docSnapshot.ref
+                .set({userEmail: user.email,
+                      userID: user.uid, 
+                      collections: []})
+                .then(() => console.log("empty collections for new user was created"))
             }
-            console.log(store.getters.getRefToUserCustoms.path);
           })
-          .catch(err => {
-            alert(err.message);
-          });
+          .catch(err => console.error(err.message));
       }
     });
   }

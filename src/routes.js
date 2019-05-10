@@ -25,7 +25,6 @@ let routes = [
 
   {
     path: '/',
-    // component: require('./App').default
   }
 ]
 

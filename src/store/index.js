@@ -31,7 +31,6 @@ export const store = new Vuex.Store({
       setRefToUserCustoms (state, reference) {
         state.refToUserCustoms = reference
       },
-      
       setUsersCustoms(state, array){
         state.usersCustoms = array
       }
@@ -49,19 +48,18 @@ export const store = new Vuex.Store({
           collections: getters.getUsersCustoms.filter(el => el.name!=name)
         })
       },
+
       updateUsersCustoms: function ({state, commit}) {
         state.refToUserCustoms.get()
-        .then((snapshot) => {
+        .then((snapshot) => 
           commit('setUsersCustoms', snapshot.get('collections'))
-        }).catch((err) => {
-          alert(err.message)
-        })
+        ).catch((err)=>console.error(err.message))
       },
 
       signInViaGoogle: function () {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>{
           return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        }).catch(()=>{});
+        }).catch((err)=>console.error(err.message))
       },
   
       signUserOut: ({commit}) => {
@@ -69,7 +67,7 @@ export const store = new Vuex.Store({
         commit('setCurrentUser', null)
         commit('setRefToUserCustoms', null)
         commit('setUsersCustoms', null)
-        router.replace({ path: '/snippets' })
+        router.replace({ path: '/snippets/Greetings' })
       }
     }
   })
