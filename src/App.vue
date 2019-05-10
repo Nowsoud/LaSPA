@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
-    <router-view style="z-index:-1"/>
+    <router-view/>
   </div>
 </template>
 <style>

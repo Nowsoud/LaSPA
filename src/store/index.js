@@ -8,7 +8,6 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
       currentUser: null,
-      //ссылка на документ с данными пользователя и его кастомными коллекциями
       refToUserCustoms: null,
       usersCustoms: null
     },
@@ -29,7 +28,6 @@ export const store = new Vuex.Store({
       setCurrentUser: (state, user) => {
         state.currentUser = user
       },
-
       setRefToUserCustoms (state, reference) {
         state.refToUserCustoms = reference
       },
@@ -38,7 +36,6 @@ export const store = new Vuex.Store({
         state.usersCustoms = array
       }
     },
-  
     actions: {
       addCustomCollection: ({state}, newCollectionName)=>{
         var obj = { name: newCollectionName, count: 0 }
@@ -52,7 +49,6 @@ export const store = new Vuex.Store({
           collections: getters.getUsersCustoms.filter(el => el.name!=name)
         })
       },
-
       updateUsersCustoms: function ({state, commit}) {
         state.refToUserCustoms.get()
         .then((snapshot) => {
