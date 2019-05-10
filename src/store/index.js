@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
+import router from '../routes.js'
 
 Vue.use(Vuex)
 
@@ -32,23 +33,25 @@ export const store = new Vuex.Store({
       setRefToUserCustoms (state, reference) {
         state.refToUserCustoms = reference
       },
+      
       setUsersCustoms(state, array){
         state.usersCustoms = array
-      },
-      removeCustomCollectionByName(state,name){
-        return state.refToUserCustoms.update({
-          collections: state.getters.getUsersCustoms().filter(el => el.name!=name)
-        })
-      },
-      addCustomCollection: (state, newCollectionName)=>{
-        var obj = { name: newCollectionName, count: 0 }
-        return state.refToUserCustoms.update({
-          collections: [...state.getters.getUsersCustoms, obj]
-        })
       }
     },
   
     actions: {
+      addCustomCollection: ({state}, newCollectionName)=>{
+        var obj = { name: newCollectionName, count: 0 }
+        return state.refToUserCustoms.update({
+          collections: [...state.usersCustoms, obj]
+        })
+      },
+
+      removeCustomCollectionByName({getters},name){
+        return getters.getRefToUserCustoms.update({
+          collections: getters.getUsersCustoms.filter(el => el.name!=name)
+        })
+      },
 
       updateUsersCustoms: function ({state, commit}) {
         state.refToUserCustoms.get()
@@ -70,6 +73,7 @@ export const store = new Vuex.Store({
         commit('setCurrentUser', null)
         commit('setRefToUserCustoms', null)
         commit('setUsersCustoms', null)
+        router.replace({ path: '/snippets' })
       }
     }
   })
