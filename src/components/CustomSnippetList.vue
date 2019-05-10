@@ -4,7 +4,7 @@
             <h3 class="d-inline">{{collection.name}}</h3>
             <button class="btn btn-success float-right ml-3" data-toggle="modal" data-target="#mod">New snippet</button>
             <!-- I didn't figure out how to delete collection from here for now-->
-            <button class="btn btn-danger float-right">Remove Collection</button>
+            <button class="btn btn-danger float-right" @click="removeCollection">Remove Collection</button>
             
             <div class="modal fade" id="mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -80,7 +80,6 @@ export default {
 
     methods: {
         addNewSnippet() {
-            // console.log(this.getRefToUserCustoms)//.collection('this.collection.name'))
             this.getRefToUserCustoms.collection(this.collection.name).doc()
             .set(this.newSnippet).then(this.fetchSnippetsFromCollection()).catch((err) => {
                 alert(err.message)
@@ -94,6 +93,18 @@ export default {
         fetchSnippetsFromCollection() {
             this.getRefToUserCustoms.collection(this.collection.name).get().then((querySnapshot) => {
                 this.snippets = querySnapshot.docs
+            })
+        },
+
+        removeCollection() {
+            this.$store.dispatch('removeCustomCollectionByName', this.collection.name).then(() => {
+                this.$store.dispatch('updateUsersCustoms')
+                this.getRefToUserCustoms.collection(this.collection.name).get().then((querySnapshot) => {
+                        querySnapshot.forEach((qds) => {
+                            qds.ref.delete()
+                        })
+                })
+                this.$router.replace({ path: '/snippets'})
             })
         }
     }

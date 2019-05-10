@@ -97,18 +97,10 @@
     },
 
     methods: {
-      removeCustomCollectionByName (name) {
-        this.$store.commit('removeCustomCollectionByName', name) .then(this.fetchCustomCollections())
-      },
-
       addCustomCollection: function () {
-        this.$store.commit("addCustomCollection",this.newCollectionName).then(() => {
-          this.fetchCustomCollections()
+        this.$store.dispatch("addCustomCollection",this.newCollectionName).then(() => {
+          this.$store.dispatch('updateUsersCustoms')
         })
-      },
-
-      fetchCustomCollections: function () {
-          this.customCollections = this.$store.state.usersCustoms
       }
     }
   }
