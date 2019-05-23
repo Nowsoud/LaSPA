@@ -12,9 +12,10 @@
     <p style="text-align:center;">
     <img src="http://www.alcdsb.on.ca/PublishingImages/Lists/Announcements/EditForm/letter.png"></p>
     <blockquote>
-    	<p style="margin-left:2%;margin-top:1%;margin-right:2%;font-size:1.3em;">The functionality of the application is constantly updated. We advise to follow the updates.We will be grateful for any feedback about our application. Because you users are our motivation to continually improve our product. Thank you very much for being with us!</p>
-    	<footer>Development team</footer>
+    	<p style="margin-left:2%;margin-top:1%;margin-right:2%;font-size:1.3em;text-indent: 1.5em;">The functionality of the application is constantly updated. We advise to follow the updates.We will be grateful for any feedback about our application. Because you users are our motivation to continually improve our product. Thank you very much for being with us!</p>
+    	<footer style="margin-left:4%;margin-top:1%;margin-right:2%;font-size:1em;"><i> - Development team</i></footer>
     </blockquote>
-    <hr>
+    <hr style="margin-left:2%;margin-right:2%;">
+    <p style="text-align:center;font-size:0.7em;">© SneepIt 2019</p>
   </div>
 </template>
