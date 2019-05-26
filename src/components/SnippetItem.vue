@@ -16,27 +16,27 @@ export default {
   },
   data() {
     return {
-      language: "en"
+      language: "en",
+      title:"",
+      body:""
     };
   },
-  computed: {
-      title: currentSnippet.get("topic"),
-      body: currentSnippet
-          .get("body")
-          .split("\\n")
-          .join("\n")
+  mounted(){
+    this.title = this.currentSnippet.get('topic')
+    this.body = this.currentSnippet.get('body')
   },
   methods: {
-    Translate: () => {
+    Translate: function(){
       var key ="trnsl.1.1.20130922T110455Z.4a9208e68c61a760.f819c1db302ba637c2bea1befa4db9f784e9fbb8";
       var translate = require('yandex-translate')(key)
+
       translate.translate(this.title, { to: 'ru' },
         (err, res) =>{
-          this.title = res.text;
+          this.title = res.text[0];
         });
       translate.translate(this.body, { to: 'ru' }, 
         (err, res) => {
-          this.body = res.text;
+          this.body = res.text[0];
         });
     }
   }
