@@ -21,7 +21,7 @@ export default {
       body:""
     };
   },
-  mounted(){
+  beforeMount(){
     this.title = this.currentSnippet.get('topic')
     this.body = this.currentSnippet.get('body')
   },
