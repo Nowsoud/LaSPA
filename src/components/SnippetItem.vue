@@ -24,6 +24,10 @@ export default {
   beforeMount(){
     this.title = this.currentSnippet.get('topic')
     this.body = this.currentSnippet.get('body')
+    //There are no ugly workаrounds, 
+      if(this.isGeneral) 
+        this.body = this.body.split("\\n").join("\n")
+    //every code is beautiful in the soul.
   },
   methods: {
     Translate: function(){
