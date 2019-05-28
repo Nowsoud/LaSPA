@@ -16,19 +16,21 @@ export default {
   },
   data() {
     return {
-      language: "en",
-      title:"",
-      body:""
+      language: "en"
     };
   },
-  beforeMount(){
-    this.title = this.currentSnippet.get('topic')
-    this.body = this.currentSnippet.get('body')
-    //There are no ugly workаrounds, 
-      if(this.isGeneral) 
-        this.body = this.body.split("\\n").join("\n")
-    //every code is beautiful in the soul.
+
+  computed: {
+    title() {
+      return this.currentSnippet.get('topic')
+    },
+    body() {
+      var body = this.currentSnippet.get('body')
+      if(this.isGeneral) return body.split("\\n").join("\n")
+      else return body 
+    }
   },
+  
   methods: {
     Translate: function(){
       var key ="trnsl.1.1.20130922T110455Z.4a9208e68c61a760.f819c1db302ba637c2bea1befa4db9f784e9fbb8";
