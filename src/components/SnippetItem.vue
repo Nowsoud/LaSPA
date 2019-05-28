@@ -16,18 +16,21 @@ export default {
   },
   data() {
     return {
-      language: "en"
+      language: "en",
+      title: "",
+      body: ""
     };
   },
 
-  computed: {
-    title() {
-      return this.currentSnippet.get('topic')
-    },
-    body() {
-      var body = this.currentSnippet.get('body')
-      if(this.isGeneral) return body.split("\\n").join("\n")
-      else return body 
+  watch: {
+    currentSnippet: {
+      immediate: true,
+      handler: function (newSnippet) {
+        this.title = newSnippet.get('topic')
+        var body = newSnippet.get('body')
+        if(this.isGeneral) this.body = body.split("\\n").join("\n")
+        else this.body = body
+      }
     }
   },
   
