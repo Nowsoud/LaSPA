@@ -5,6 +5,7 @@
     <a href="#" v-if="!isGeneral" class="card-link">Edit</a>
     <a href="#" v-if="!isGeneral" class="card-link text-danger">Remove</a>
     <a href="#" @click="Translate" class="card-link text-danger">Translate</a>
+    <a href="#" v-clipboard="body" class="card-link text-primary">Copy</a>
   </div>
 </template>
 
