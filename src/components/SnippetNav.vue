@@ -37,11 +37,12 @@
 
           <ul class="list-group mt-3">
             <li v-if="!isUserSignedIn" class="list-group-item list-group-item-danger">Sign in to customize own snippets</li>
-            <li class="list-group-item list-group-item-action" v-for="(collection, index) in customCollections" :key="index">
-              <router-link tag="div" :to="{ path: '/snippets/customs', query: { collection: collection }}" class="float-left w-75">
+            <!-- <li class="list-group-item list-group-item-action" v-for="(collection, index) in customCollections" :key="index"> -->
+              <router-link tag="li" v-for="(collection, index) in customCollections" :key="index"
+                :to="{ path: '/snippets/customs', query: { collection: collection }}" class="list-group-item">
                 {{collection.name}}
               </router-link>
-            </li>
+            <!-- </li> -->
           </ul>
           
         </div>
