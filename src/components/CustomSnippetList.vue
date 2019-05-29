@@ -9,7 +9,7 @@
                 Remove Collection
             </button>
             
-            <div class="modal fade" id="mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="mod" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <SnippetItem v-for="(snippet, index) in snippets" :currentSnippet="snippet"
+        <SnippetItem v-for="(snippet, index) in snippets" :currentSnippet="snippet" @rerenderSnippet="fetchSnippetsFromCollection"
             :key="index" :number="index" @snippetRemoved="removeSnippet"></SnippetItem>
     </div>
 </template>
