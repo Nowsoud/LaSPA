@@ -1,17 +1,20 @@
 <template>
+<div class="card mb-3">
   <div class="card-body">
     <h5 class="card-title multiline-text">{{ title }}</h5>
     <p class="card-text multiline-text">{{ body }}</p>
     <a href="#" v-if="!isGeneral" class="card-link">Edit</a>
-    <a href="#" v-if="!isGeneral" class="card-link text-danger">Remove</a>
+    <a href="#" v-if="!isGeneral" @click="removeCustomSnippet" class="card-link text-danger">Remove</a>
     <a href="#" @click="Translate" class="card-link text-danger">Translate</a>
     <a href="#" v-clipboard="body" class="card-link text-primary">Copy</a>
   </div>
+</div>
 </template>
 
 <script>
 export default {
   props: {
+    number: Number,
     currentSnippet: Object,
     isGeneral: Boolean
   },
@@ -48,6 +51,10 @@ export default {
         (err, res) => {
           this.body = res.text[0];
         });
+    },
+  
+    removeCustomSnippet() {
+      this.currentSnippet.ref.delete().then(() => this.$emit('snippetRemoved', this.number))
     }
   }
 };
