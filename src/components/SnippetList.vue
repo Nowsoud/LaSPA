@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid scrollable">
-    <div class="card my-3" v-for="(snippet, index) in snippets" :key="index">
+    <div class="my-3" v-for="(snippet, index) in snippets" :key="index">
       <SnippetItem :currentSnippet="snippet" :isGeneral=true></SnippetItem>
     </div>
   </div>
