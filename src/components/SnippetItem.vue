@@ -6,8 +6,12 @@
         <p class="card-text multiline-text">{{ body }}</p>
         <a href="#" v-if="!isGeneral" class="card-link" data-toggle="modal" :data-target="'#snip' + number">Edit</a>
         <a href="#" v-if="!isGeneral" @click="removeCustomSnippet" class="card-link text-danger">Remove</a>
-        <a href="#" @click="Translate" class="card-link text-danger">Translate</a>
         <a href="#" v-clipboard="body" class="card-link text-primary">Copy</a>
+        
+        <select class="btn btn-light ml-3 float-right"   v-model="language">
+          <option v-for="lang in languages" :key="lang">{{lang}}</option>
+        </select>
+        <a href="#" @click="Translate" class="card-link float-right">Translate</a>
       </div>
     </div>
     <div class="modal fade" :id="'snip' + number" tabindex="-1" role="dialog" aria-hidden="true">
@@ -52,6 +56,7 @@ export default {
   },
   data() {
     return {
+      languages:["en","ru","pl"],
       language: "en",
       title: "",
       body: "",
@@ -86,11 +91,11 @@ export default {
       var key ="trnsl.1.1.20130922T110455Z.4a9208e68c61a760.f819c1db302ba637c2bea1befa4db9f784e9fbb8";
       var translate = require('yandex-translate')(key)
 
-      translate.translate(this.title, { to: 'ru' },
+      translate.translate(this.title, { to: this.language },
         (err, res) =>{
           this.title = res.text[0];
         });
-      translate.translate(this.body, { to: 'ru' }, 
+      translate.translate(this.body, { to: this.language }, 
         (err, res) => {
           this.body = res.text[0];
         });
