@@ -24,8 +24,7 @@
           <li
             class="nav-item btn"
             v-on:click="signInViaGoogle"
-            v-if="!isUserSignedIn"
-            id="dropdownMenuButton">
+            v-if="!isUserSignedIn">
             <div>
               Sign in via <i class="fab fa-google" style="font-size:18px;color:red"/>
             </div>
