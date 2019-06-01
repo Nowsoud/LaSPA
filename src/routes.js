@@ -25,6 +25,7 @@ let routes = [
 
   {
     path: '/',
+    redirect:'/snippets/Greetings'
   }
 ]
 
