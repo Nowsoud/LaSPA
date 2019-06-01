@@ -23,24 +23,11 @@
           <li class="nav-item btn" @click="signOut" v-if="isUserSignedIn">Sign out</li>
           <li
             class="nav-item btn"
+            v-on:click="signInViaGoogle"
             v-if="!isUserSignedIn"
-            id="dropdownMenuButton"
-            data-toggle="dropdown">
-            <div>Sign in</div>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-              <ul class="nav nav-fill">
-                <li class="nav-item">
-                  <i class="fab fa-facebook" style="font-size:24px; color: blue;"/>
-                </li>
-                <li class="nav-item">
-                  <i class="fab fa-google"
-                     v-on:click="signInViaGoogle"
-                     style="font-size:24px;color:red"/>
-                </li>
-                <li class="nav-item">
-                  <i class="fab fa-github" style="font-size:24px"/>
-                </li>
-              </ul>
+            id="dropdownMenuButton">
+            <div>
+              Sign in via <i class="fab fa-google" style="font-size:18px;color:red"/>
             </div>
           </li>
         </ul>
